@@ -1,6 +1,7 @@
 import subprocess
 import os
 import sys
+
 #get the info from the "accie art" file
 WarningLogo = open("accie art.txt")
 # color vars
