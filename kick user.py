@@ -96,4 +96,4 @@ try:
         # Call the main function when the script is executed
         main()
 except KeyboardInterrupt:
-    print("Exiting program...")
+    print("\nExiting program...")
