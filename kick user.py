@@ -1,4 +1,3 @@
-# Import statements are commented out
 from DontEdit import *
 
 # Function to perform an nslookup and save the output to a file
@@ -21,6 +20,14 @@ def NSLOOKUP():
     except subprocess.CalledProcessError as e:
         # Print an error message if nslookup command fails
         print(f"Error: {e}")
+
+def Kick():
+    # Prompt the user to enter the IP address of the user to kick
+    print("Enter the IP address of the user you want to kick off:")
+    ip_address = input(">>> ")
+
+    # Call the kick_user function
+    kick_user(ip_address)
 
 # Function to get the PID of an SSH session associated with an IP address
 
@@ -77,16 +84,10 @@ def main():
             # Call the NSLOOKUP function
             NSLOOKUP()
             sys.exit(0)  # Exit after nslookup
+       
         # Look for the user to input kick in the prompt
         elif nslookupOrKick in KICK:
-            # Prompt the user to enter the IP address of the user to kick
-            print("Enter the IP address of the user you want to kick off:")
-            ip_address = input(">>> ")
-
-            # Add input validation if needed
-
-            # Call the kick_user function
-            kick_user(ip_address)
+            Kick()
         else:
             # Print an error message if the input is not recognized
             print(f"[ {RED}ERROR{RESET} ] I don't understand what you meant by '{nslookupOrKick}'. Please try again.")
