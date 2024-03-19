@@ -33,5 +33,7 @@ def service():
 #checks if the user is on linux or not
 if platform.system() == linux:
     service()
+
+# if the user is not on linux then it will tell them that the program only works on linux
 else:
     print("This program only works on Linux computers")
