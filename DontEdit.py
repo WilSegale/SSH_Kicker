@@ -33,3 +33,10 @@ nslookupCommand = ["nslookup",
 KICK = ["kick",
         "Kick",
         "KICK"]
+
+
+yes = ["yes",
+       "Yes",
+       "YES",
+       "y",
+       "Y"]
