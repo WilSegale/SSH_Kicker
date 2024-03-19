@@ -1,6 +1,18 @@
 from DontEdit import *
 
+def NSLOOKUP():
+    nslookup = input("Enter the domain to lookup: ")
+    output_file="nslookup.txt"
 
+    try:
+        with open(output_file, 'a') as f:
+            subprocess.run(['nslookup', nslookup], stdout=f, text=True, check=True)
+            subprocess.run(['nslookup', nslookup])
+
+        print(f"nslookup output saved to {output_file}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
+        
 def get_ssh_pid(ip_address):
     try:
         # Get the PID of the SSH session associated with the given IP address
@@ -11,7 +23,7 @@ def get_ssh_pid(ip_address):
                 return pid
     except subprocess.CalledProcessError:
         print("Error: Unable to retrieve PID for IP address", ip_address)
-    return None
+    return None   
 
 def kick_user(ip_address):
     pid = get_ssh_pid(ip_address)
@@ -38,23 +50,21 @@ def main():
         print(who)
 
         nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
-    # looks for the user to in put nslookup in the prompt
-    if nslookupOrKick in nslookupCommand:
-        nslookup = input("Enter the domain to lookup: ")
-        print(f"{GREEN}You were attacked by{RESET}")
-        subprocess.run(['nslookup', nslookup])
-        sys.exit(1)
-    # looks for the user to in put kick in the prompt
-    elif nslookupOrKick in KICK:
-        print("Enter the IP address of the user you want to kick off:")
-        ip_address = input(">>> ")
 
-        # Add input validation if needed
+        # looks for the user to input nslookup in the prompt
+        if nslookupOrKick in nslookupCommand:
+            NSLOOKUP()
+            sys.exit(0)  # Exit after nslookup
+        # looks for the user to input kick in the prompt
+        elif nslookupOrKick in KICK:
+            print("Enter the IP address of the user you want to kick off:")
+            ip_address = input(">>> ")
 
-        kick_user(ip_address)
-    else:
-        print(f"[ {RED}ERROR{RESET} ] I dont understand by what you ment by '{nslookupOrKick}' please try again")
+            # Add input validation if needed
 
+            kick_user(ip_address)
+        else:
+            print(f"[ {RED}ERROR{RESET} ] I don't understand what you meant by '{nslookupOrKick}'. Please try again.")
 
 if __name__ == "__main__":
     main()
