@@ -1,15 +1,22 @@
 import subprocess
 import os
 import sys
-
-
+#get the info from the "accie art" file
+WarningLogo = open("accie art.txt")
+# color vars
 BRIGHT = '\033[1m'
 GREEN = "\033[92m"
 RED = "\033[91m"
+ORANGE = "\033[38;2;255;165;0m"
 RESET = "\033[0m"
 
+# Esay way to check if the script is run with sudo privileges
+ROOT = 0
+
 # Check if the script is run with sudo privileges
-if os.geteuid() != 0:
+if os.geteuid() != ROOT:
+    print(f"{ORANGE}{WarningLogo.read()}{RESET}")
+    print()
     print("This script requires sudo privileges to run.")
     print("Please run the script again with sudo.")
     sys.exit(1)
@@ -43,8 +50,7 @@ else:
             print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
 
     if __name__ == "__main__":
-        # Replace '192.168.1.100' with the IP address of the user you want to kick off
+        # what the user inputs in the "UserToKick" it kick the user off the computer
         UserToKick = input("Input the IP: ")
-        
+        # calls to the kick user funciton
         kick_user(UserToKick)
-
