@@ -104,5 +104,6 @@ try:
     if __name__ == "__main__":
         # Call the main function when the script is executed
         main()
+# the user hits ctrl+c to exit the program
 except KeyboardInterrupt:
     print("\nExiting program...")
