@@ -2,10 +2,8 @@ from DontEdit import *
 import sys
 import time
 def service():
-    print("Starting service")
-    while True:
-        time.sleep(1)
-        print("Service running")
+    subprocess.run("sudo","service","--list")
+
 if platform.system() == linux:
     service()
 else:
