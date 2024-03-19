@@ -47,11 +47,11 @@ else:
                 # Terminate the SSH session
                 subprocess.run(['sudo', 'kill', pid])
                 print(f"SSH session associated with {BRIGHT}{GREEN}{ip_address}{RESET} has been terminated.", file=KICKED)
-                print(f"We have kicked {BRIGHT}{GREEN}{UserToKick}{RESET} off your computer")
+                print(f"We have kicked {BRIGHT}{GREEN}{UserToKick}{RESET} off your computer", file=KICKED)
             except subprocess.CalledProcessError:
-                print(f"[ {RED}FAIL{RESET} ]: Unable to terminate SSH session for IP address {ip_address}")
+                print(f"[ {RED}FAIL{RESET} ]: Unable to terminate SSH session for IP address {ip_address}", file=KICKED)
         else:
-            print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
+            print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}", file=KICKED)
 
     if __name__ == "__main__":
         # what the user inputs in the "UserToKick" it kick the user off the computer
