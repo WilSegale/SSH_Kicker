@@ -54,4 +54,4 @@ else:
         # what the user inputs in the "UserToKick" it kick the user off the computer
         UserToKick = input("Input the IP: ")
         # calls to the kick user funciton
-        kick_user(UserToKick)
+        kick_user(f"{UserToKick}")
