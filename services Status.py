@@ -4,7 +4,7 @@ import time
 def service():
     x = subprocess.run(["service", "--status-all"])
 
-    for i in x:
+    for i in len(x):
         print(i)
 
 if platform.system() == linux:
