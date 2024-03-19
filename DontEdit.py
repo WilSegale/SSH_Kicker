@@ -19,6 +19,6 @@ nslookupCommand = ["nslookup",
                    "ns",
                    "NS"]
 # var for the kick funciotn of the program
-kick = ["kick",
+KICK = ["kick",
         "Kick",
         "KICK"]

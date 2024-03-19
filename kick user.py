@@ -43,10 +43,9 @@ def main():
         nslookup = input("Enter the domain to lookup: ")
         print(f"{GREEN}You were attacked by{RESET}")
         subprocess.run(['nslookup', nslookup])
-        sys.exit(0)  # Exit after nslookup
-
+        sys.exit(1)
     # looks for the user to in put kick in the prompt
-    elif nslookupOrKick in kick:
+    elif nslookupOrKick in KICK:
         print("Enter the IP address of the user you want to kick off:")
         ip_address = input(">>> ")
 
