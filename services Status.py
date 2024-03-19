@@ -1,13 +1,10 @@
-from DontEdit import *
-import sys
-import time
-def service():
-    x = subprocess.run(["service", "--status-all"])
+import subprocess
+    
+    
+service = "apache2"
 
-    for i in len(x):
-        print(i)
+p =  subprocess.Popen(["systemctl", "is-active",  service], stdout=subprocess.PIPE)
+(output, err) = p.communicate()
+output = output.decode('utf-8')
 
-if platform.system() == linux:
-    service()
-else:
-    print("This program only works on Linux computers")
+print(output)
