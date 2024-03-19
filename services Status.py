@@ -1,7 +1,7 @@
 import subprocess
     
     
-service = "apache2"
+service = 'service --status-all'
 
 p =  subprocess.Popen(["systemctl", "is-active",  service], stdout=subprocess.PIPE)
 (output, err) = p.communicate()
