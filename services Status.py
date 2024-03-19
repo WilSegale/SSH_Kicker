@@ -1,10 +1,10 @@
-import subprocess
-    
-    
-service = 'service --status-all'
-
-p =  subprocess.Popen(["systemctl", "is-active",  service], stdout=subprocess.PIPE)
-(output, err) = p.communicate()
-output = output.decode('utf-8')
-
-print(output)
+from DontEdit import *
+import sys
+import time
+def service():
+    x = subprocess.run(["service", "--status-all"])
+    print(x.stdout)
+if platform.system() == linux:
+    service()
+else:
+    print("This program only works on Linux computers")
