@@ -58,14 +58,17 @@ try:
                     print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
                     print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer", file=kicked_users_file)
                     time.sleep(2)
-                    print("Do you want to turn off ssh (yes/no)")
-                    ssh = input(">>> ")
-                    if ssh in yes:
-                        subprocess.run(['sudo', 'service', 'ssh', 'stop'])
-                        time.sleep(2)
-                        subprocess.run(['sudo', 'service', 'ssh', 'status'])
+                    if platform.system() == linux:
+                        print("Do you want to turn off ssh (yes/no)")
+                        ssh = input(">>> ")
+                        if ssh in yes:
+                            subprocess.run(['sudo', 'service', 'ssh', 'stop'])
+                            time.sleep(2)
+                            subprocess.run(['sudo', 'service', 'ssh', 'status'])
+                        else:
+                            print("Ok SSH will still run")
                     else:
-                        print("Ok SSH will still run")
+                        sys.exit(1)
             except subprocess.CalledProcessError:
                 # Print an error message if unable to terminate SSH session
                 print(f"[ {RED}FAIL{RESET} ]: Unable to terminate SSH session for IP address {ip_address}")
@@ -78,7 +81,7 @@ try:
         # Check if the script is run with sudo privileges
         if os.geteuid() != ROOT:
             # Print a message if sudo privileges are required
-            print(f"{ORANGE}This script requires sudo privileges to run.{RESET}")
+            print(f"{ORANGE_START}This script requires sudo privileges to run.{RESET}")
             sys.exit(1)
         else:
             # Get the current users logged in

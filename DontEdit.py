@@ -17,7 +17,7 @@ linux = "Linux"
 BRIGHT = '\033[1m'
 GREEN = "\033[92m"
 RED = "\033[91m"
-ORANGE = "\033[38;2;255;165;0m"
+ORANGE_START = "\033[38;2;255;165;0m"
 RESET = "\033[0m"
 
 #Easy way to read root form the user
