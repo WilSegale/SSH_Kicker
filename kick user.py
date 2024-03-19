@@ -57,6 +57,15 @@ try:
                 with open("KICKED_USERS.txt", "a") as kicked_users_file:
                     print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
                     print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer", file=kicked_users_file)
+                    time.sleep(2)
+                    print("Do you want to turn off ssh (yes/no)")
+                    ssh = input(">>> ")
+                    if ssh in yes:
+                        subprocess.run(['sudo', 'service', 'ssh', 'stop'])
+                        time.sleep(2)
+                        subprocess.run(['sudo', 'service', 'ssh', 'status'])
+                    else:
+                        print("Ok SSH will still run")
             except subprocess.CalledProcessError:
                 # Print an error message if unable to terminate SSH session
                 print(f"[ {RED}FAIL{RESET} ]: Unable to terminate SSH session for IP address {ip_address}")
