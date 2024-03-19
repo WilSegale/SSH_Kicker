@@ -1,6 +1,17 @@
 import subprocess
 import os
 import sys
+import datetime
+import platform
+import time
+import urllib.request
+import logging
+import requests
+import random
+
+
+#Gets the os of the computer
+linux = "Linux"
 
 # Color variables
 BRIGHT = '\033[1m'
