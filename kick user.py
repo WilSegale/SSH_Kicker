@@ -4,6 +4,7 @@ import sys
 
 #get the info from the "accie art" file
 WarningLogo = open("accie art.txt")
+
 # color vars
 BRIGHT = '\033[1m'
 GREEN = "\033[92m"
@@ -13,6 +14,8 @@ RESET = "\033[0m"
 
 # Esay way to check if the script is run with sudo privileges
 ROOT = 0
+
+KICKED = open("KICKED_USERS.txt", "w")
 
 # Check if the script is run with sudo privileges
 if os.geteuid() != ROOT:
@@ -43,7 +46,7 @@ else:
             try:
                 # Terminate the SSH session
                 subprocess.run(['sudo', 'kill', pid])
-                print(f"SSH session associated with {BRIGHT}{GREEN}{ip_address}{RESET} has been terminated.")
+                print(f"SSH session associated with {BRIGHT}{GREEN}{ip_address}{RESET} has been terminated.", file=KICKED)
                 print(f"We have kicked {BRIGHT}{GREEN}{UserToKick}{RESET} off your computer")
             except subprocess.CalledProcessError:
                 print(f"[ {RED}FAIL{RESET} ]: Unable to terminate SSH session for IP address {ip_address}")
