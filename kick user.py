@@ -1,5 +1,37 @@
 from DontEdit import *
+# checks if the user has ssh running or not for linux
+if platform.system() == linux:
+    def is_ssh_enabled():
+        try:
+            output = subprocess.check_output(["systemctl", "status", "ssh"])
+            return b"active (running)" in output
+        except subprocess.CalledProcessError:
+            return False
+
+    if is_ssh_enabled():
+        print("SSH is enabled")
+    else:
+        print("SSH is not enabled")
+        sys.exit(0)  # Exit after nslookup
+
+# checks if the user has ssh running or not for mac os
+else:
+    def is_ssh_enabled():
+        try:
+            output = subprocess.check_output(["launchctl", "list", "|", "grep", "ssh"])
+            return b"com.openssh.sshd" in output
+        except subprocess.CalledProcessError:
+            return False
+
+    if is_ssh_enabled():
+        print("SSH is enabled")
+    else:
+        print("SSH is not enabled")
+        sys.exit(0)  # Exit after nslookup
+
+
 try:
+    
     # Function to perform an nslookup and save the output to a file
     def NSLOOKUP():
         # Prompt the user to enter the domain to lookup
