@@ -39,6 +39,8 @@ def check_OS():
             print("You are using Linux.",
                   "So I will remove the MAC veriosn of the program.")
             subprocess.run(["rm", "-rf", "MacOSKick.py"])
+            subprocess.run(["rm", "-rf", "WindowsKick.py"])
         else:
-            print("I can't find your OS")
+            print("You are using Windows.",
+                  "So I will remove the Linux and the MacOs veriosn of the program.")
 check_OS()
