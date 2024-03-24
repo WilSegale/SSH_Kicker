@@ -63,28 +63,26 @@ def kick_user(ip_address):
 # Main function
 def main():
     ROOT = 0  # Assuming ROOT is a constant representing root privileges, you might want to define it
-    if os.getpid() != ROOT:
-        print("This script requires elevated privileges to run.")
-        sys.exit(1)
+
+    who = subprocess.check_output(['tasklist']).decode('utf-8')  # Windows equivalent of 'who'
+    print(who)
+
+    nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
+
+    if nslookupOrKick.lower() == 'nslookup':
+        NSLOOKUP()
+        sys.exit(0)
+    
+    elif nslookupOrKick.lower() == 'kick':
+        ip_address = input("Enter the IP address of the user you want to kick off: ")
+        kick_user(ip_address)
     else:
-        who = subprocess.check_output(['tasklist']).decode('utf-8')  # Windows equivalent of 'who'
-        print(who)
-
-        nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
-
-        if nslookupOrKick.lower() == 'nslookup':
-            NSLOOKUP()
-            sys.exit(0)
-        
-        elif nslookupOrKick.lower() == 'kick':
-            ip_address = input("Enter the IP address of the user you want to kick off: ")
-            kick_user(ip_address)
-        else:
-            print("I don't understand what you meant. Please try again.")
+        print("I don't understand what you meant. Please try again.")
 
 # Script execution
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+
         print("\nExiting program...")
