@@ -1,4 +1,7 @@
-from DontEdit import *
+import subprocess
+import os
+import sys
+import time
 
 # Function to check if SSH is enabled on Windows
 def is_ssh_enabled_windows():
@@ -59,7 +62,8 @@ def kick_user(ip_address):
 
 # Main function
 def main():
-    if os.geteuid() != ROOT:
+    ROOT = 0  # Assuming ROOT is a constant representing root privileges, you might want to define it
+    if os.getpid() != ROOT:
         print("This script requires elevated privileges to run.")
         sys.exit(1)
     else:
