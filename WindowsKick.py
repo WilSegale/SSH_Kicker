@@ -62,7 +62,6 @@ def kick_user(ip_address):
 
 # Main function
 def main():
-    ROOT = 0  # Assuming ROOT is a constant representing root privileges, you might want to define it
 
     who = subprocess.check_output(['tasklist']).decode('utf-8')  # Windows equivalent of 'who'
     print(who)

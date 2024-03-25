@@ -1,7 +1,20 @@
 from DontEdit import *
+import os
+
+file_path = "WindowsKick.py"
+file_path = "LinuxKick.py"
+file_path = "MacKick.py"
+if os.path.exists(file_path):
+    print()
+else:
+    print("File does not exist.")
+    sys.exit(1)
+
+# Get the operating system name
 
 print("Do you give me permision to check your computer os (YES/NO)")
 CHECK_USER_ANSWER = input(">>> ")
+
 
 def check_OS():
     if CHECK_USER_ANSWER in yes:
