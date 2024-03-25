@@ -2,7 +2,7 @@ from DontEdit import *
 import os
 
 # Check the existence of each file
-file_paths = ["WindowsKick.py", "LinuxKick.py", "MacKick.py"]
+file_paths = ["WindowsKick.py", "LinuxKick.py", "MacOSKick.py"]
 
 # Get the operating system name
 
