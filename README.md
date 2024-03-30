@@ -1,4 +1,4 @@
-<img src="Python Security program.jpg" alt="Security python IMG" width="200" height="200">
+<img src="Python Security program.JPG" alt="Security python IMG" width="200" height="200">
 
 
 # SSH Kicker
