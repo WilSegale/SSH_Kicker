@@ -1,4 +1,4 @@
-<img src="Python Security program.jpg" alt="alt text" width="200" height="200">
+<img src="Python Security program.jpg" alt="Security python IMG" width="200" height="200">
 
 
 # SSH Kicker
@@ -22,8 +22,8 @@ SSH KICKER is a Python script designed to help you manage SSH sessions on your s
 
 1. Clone the repository:
 
-    ```bash
-    https://github.com/WilSegale/security_python.git
+    ```shell
+    git clone https://github.com/WilSegale/security_python.git
     ```
 
 2. Navigate to the project directory:
