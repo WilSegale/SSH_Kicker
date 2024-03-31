@@ -16,7 +16,7 @@ SSH KICKER is a Python script designed to help you manage SSH sessions on your s
 - Python 3.x
 - Windows Operating System
 - Linux Operating System
-- MacOs System
+- Mac Operating System
 
 ## Installation
 
