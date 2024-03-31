@@ -8,7 +8,6 @@ import urllib.request
 import logging
 import requests
 import random
-import platform
 
 
 #Gets the os of the computer

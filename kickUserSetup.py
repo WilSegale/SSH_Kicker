@@ -1,5 +1,4 @@
 from DontEdit import *
-import os
 
 # Check the existence of each file
 file_paths = ["WindowsKick.py", "LinuxKick.py", "MacOSKick.py"]
@@ -8,7 +7,6 @@ file_paths = ["WindowsKick.py", "LinuxKick.py", "MacOSKick.py"]
 
 print("Do you give me permision to check your computer os (YES/NO)")
 CHECK_USER_ANSWER = input(">>> ")
-
 
 def check_OS():
     #sees if hte user has already run the program before
@@ -58,7 +56,7 @@ def check_OS():
         elif os_name == windows:
             print("You are using Windows.",
                   "So I will remove the Linux and the MacOs veriosn of the program.")
-            subprocess.run(["del","MacOSKick.py"])
+            subprocess.run(["del", "MacOSKick.py"])
             subprocess.run(["del", "LinuxKick.py"])
         else:
             print("I don't know your OS")
