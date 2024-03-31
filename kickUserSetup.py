@@ -11,9 +11,10 @@ CHECK_USER_ANSWER = input(">>> ")
 
 
 def check_OS():
+    #sees if hte user has already run the program before
     for file_path in file_paths:
         if not os.path.exists(file_path):
-            print(f"File '{file_path}' does not exist.")
+            print(f"Program already run")
             sys.exit(1)
 
     if CHECK_USER_ANSWER in yes:
