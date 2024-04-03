@@ -31,7 +31,6 @@ else:
         print("SSH is not enabled")
         sys.exit(0)  # Exit after nslookup
 
-
 try:
     
     # Function to perform an nslookup and save the output to a file
