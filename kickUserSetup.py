@@ -60,6 +60,9 @@ try:
                 subprocess.run(["del", "LinuxKick.py"])
             else:
                 print("I don't know your OS")
+        else:
+            print("Ok I will not run the program")
+            sys.exit(1)
     check_OS()
 except KeyboardInterrupt:
     print("\nYou pressed Ctrl+C")

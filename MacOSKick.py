@@ -1,7 +1,5 @@
 from DontEdit import *
 
-
-
 # Function to check if SSH is enabled on macOS
 def is_ssh_enabled():
     try:
@@ -66,9 +64,9 @@ def kick_user(ip_address):
                 else:
                     sys.exit(1)
         except subprocess.CalledProcessError:
-            print(f"[FAIL]: Unable to terminate SSH session for IP address {ip_address}")
+            print(f"[ {RED}FAIL{RESET} ] Unable to terminate SSH session for IP address {ip_address}")
     else:
-        print(f"[FAIL] No active SSH session found for IP address {ip_address}")
+        print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
 
 # Main function
 def main():
