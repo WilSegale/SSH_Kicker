@@ -43,7 +43,7 @@ try:
             # Get the operating system name
             if os_name == Mac:
                 print("You are using MacOS.",
-                      "So I will remove the Linux veriosn of the program.")  
+                      "So I will remove the Linux and Windows veriosn of the program.")  
                 subprocess.run(["rm", "-rf", "LinuxKick.py"])
                 subprocess.run(["rm", "-rf", "WindowsKick.py"])
         
