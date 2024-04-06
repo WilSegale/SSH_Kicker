@@ -62,5 +62,5 @@ try:
                 print("I don't know your OS")
     check_OS()
 except KeyboardInterrupt:
-    print("You pressed Ctrl+C")
+    print("\nYou pressed Ctrl+C")
     sys.exit(1)
