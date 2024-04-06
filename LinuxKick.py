@@ -111,6 +111,18 @@ try:
 
     # Main function to control the flow of the script
     def main():
+        #if the user input the arguemnt enable it enables ssh for them
+        if len(sys.argv) == 2 and sys.argv[1] in ENABLE:
+            subprocess.run(["service", "ssh", "start"])
+            time.sleep(2)
+            print("SSH is now enabled")
+        
+        #if the user input the arguemnt disable it disables ssh for them
+        elif len(sys.argv) == 2 and sys.argv[1] in DISABLE:
+            subprocess.run(["service", "ssh", "stop"])
+            time.sleep(2)
+            print("SSH is now disabled")
+        
         # Check if the script is run with sudo privileges
         if os.geteuid() != ROOT:
             # Print a message if sudo privileges are required
