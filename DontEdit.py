@@ -12,6 +12,7 @@ import random
 
 #Gets the os of the computer
 os_name = platform.system()
+
 linux = "Linux"
 Mac = "Darwin"
 windows = "Windows"
@@ -44,3 +45,6 @@ yes = ["yes",
        "YES",
        "y",
        "Y"]
+
+ENABLE = ["--enable"]
+DISABLE = ["--disable"]

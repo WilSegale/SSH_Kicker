@@ -1,7 +1,4 @@
-import subprocess
-import os
-import sys
-import time
+from DontEdit import *
 
 # Function to check if SSH is enabled on Windows
 def is_ssh_enabled_windows():
@@ -47,18 +44,16 @@ def kick_user(ip_address):
                 print(f"We have kicked {ip_address} off your computer")
                 print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
                 time.sleep(2)
-                print("Do you want to turn off SSH? (yes/no)")
+                print("Do you want to turn SSH only to localusers? (yes/no)")
                 ssh = input(">>> ")
                 if ssh.lower() == 'yes':
-                    subprocess.run(['net', 'stop', 'sshd'])
-                    time.sleep(2)
-                    subprocess.run(['sc', 'query', 'sshd'])
+                    subprocess.run(["Enable-PSRemoting"," -Force"])
                 else:
                     print("SSH will still run.")
         except subprocess.CalledProcessError:
-            print(f"[FAIL]: Unable to terminate SSH session for IP address {ip_address}")
+            print(f"[ {RED}FAIL{RESET} ] Unable to terminate SSH session for IP address {ip_address}")
     else:
-        print(f"[FAIL] No active SSH session found for IP address {ip_address}")
+        print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
 
 # Main function
 def main():
@@ -83,5 +78,4 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-
         print("\nExiting program...")

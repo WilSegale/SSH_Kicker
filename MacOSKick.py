@@ -1,4 +1,7 @@
 from DontEdit import *
+
+
+
 # Function to check if SSH is enabled on macOS
 def is_ssh_enabled():
     try:
@@ -69,6 +72,7 @@ def kick_user(ip_address):
 
 # Main function
 def main():
+
     if os.geteuid() != ROOT:
         print("This script requires sudo privileges to run.")
         sys.exit(1)
@@ -85,6 +89,7 @@ def main():
         elif nslookupOrKick in KICK:
             ip_address = input("Enter the IP address of the user you want to kick off: ")
             kick_user(ip_address)
+
         else:
             print("I don't understand what you meant. Please try again.")
 
