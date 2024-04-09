@@ -8,8 +8,8 @@ def is_ssh_enabled():
     except subprocess.CalledProcessError:
         return False
 
-# Function to check if SSH is enabled on Linux
-def is_ssh_enabled_linux():
+# Function to check if SSH is enabled on MacOS
+def is_ssh_enabled_MacOS():
     try:
         output = subprocess.check_output(["systemctl", "status", "ssh"]).decode("utf-8")
         return "active (running)" in output
@@ -72,7 +72,7 @@ def kick_user(ip_address):
 def main():
 
     if os.geteuid() != ROOT:
-        print("This script requires sudo privileges to run.")
+        print(f"{RED}This script requires sudo privileges to run.{RESET}")
         sys.exit(1)
     else:
         who = subprocess.check_output(['who']).decode('utf-8')

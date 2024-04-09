@@ -51,8 +51,7 @@ SSH KICKER is a Python script designed to help you manage SSH sessions on your s
     python3 WindowsKick.py
     ```
 ## Usage
-
-1. Run the script: `python kickUserSetup.py`
+1. Run the script: `python kickUserSetup.py` 
 2. Follow the prompts to select an action.
 3. Depending on your choice, provide necessary inputs such as domain name or IP address.
 
