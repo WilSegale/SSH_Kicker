@@ -8,13 +8,6 @@ def is_ssh_enabled():
     except subprocess.CalledProcessError:
         return False
 
-# Function to check if SSH is enabled on MacOS
-def is_ssh_enabled_MacOS():
-    try:
-        output = subprocess.check_output(["systemctl", "status", "ssh"]).decode("utf-8")
-        return "active (running)" in output
-    except subprocess.CalledProcessError:
-        return False
 
 # Function to perform an nslookup and save the output to a file
 def NSLOOKUP():
@@ -49,7 +42,7 @@ def kick_user(ip_address):
             subprocess.run(['sudo', 'kill', pid])
             print(f"SSH session associated with {ip_address} has been terminated.")
             with open("KICKED_USERS.txt", "a") as kicked_users_file:
-                print(f"We have kicked {ip_address} off your computer")
+                print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
                 print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
                 time.sleep(2)
                 if platform.system() == linux:

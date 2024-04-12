@@ -15,24 +15,8 @@ if platform.system() == linux:
     else:
         print("SSH is not enabled")
         sys.exit(0)  # Exit after nslookup
-
-# checks if the user has ssh running or not for mac os
-else:
-    def is_ssh_enabled():
-        try:
-            output = subprocess.check_output(["launchctl", "list", "|", "grep", "ssh"])
-            return b"com.openssh.sshd" in output
-        except subprocess.CalledProcessError:
-            return False
-
-    if is_ssh_enabled():
-        print("SSH is enabled")
-    else:
-        print("SSH is not enabled")
-        sys.exit(0)  # Exit after nslookup
-
+        
 try:
-    
     # Function to perform an nslookup and save the output to a file
     def NSLOOKUP():
         # Prompt the user to enter the domain to lookup
@@ -88,8 +72,7 @@ try:
                 print(f"SSH session associated with {BRIGHT}{GREEN}{ip_address}{RESET} has been terminated.")
                 # Log the kicked user to a file
                 with open("KICKED_USERS.txt", "a") as kicked_users_file:
-                    print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
-                    print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer", file=kicked_users_file)
+                    print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
                     time.sleep(2)
                     if platform.system() == linux:
                         print("Do you want to turn off ssh (yes/no)")
@@ -113,13 +96,19 @@ try:
     def main():
         #if the user input the arguemnt enable it enables ssh for them
         if len(sys.argv) == 2 and sys.argv[1] in ENABLE:
-            subprocess.run(["service", "ssh", "start"])
+            subprocess.run(["sudo",
+                            "service", 
+                            "ssh", 
+                            "start"])
             time.sleep(2)
             print("SSH is now enabled")
         
         #if the user input the arguemnt disable it disables ssh for them
         elif len(sys.argv) == 2 and sys.argv[1] in DISABLE:
-            subprocess.run(["service", "ssh", "stop"])
+            subprocess.run(["sudo",
+                            "service", 
+                            "ssh", 
+                            "stop"])
             time.sleep(2)
             print("SSH is now disabled")
         
