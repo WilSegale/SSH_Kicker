@@ -1,0 +1,5 @@
+Server:		172.16.90.173
+Address:	172.16.90.173#53
+
+** server can't find 38.1.168.192.in-addr.arpa: NXDOMAIN
+
