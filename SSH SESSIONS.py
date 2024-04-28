@@ -1,5 +1,5 @@
 import subprocess
-
+import sys
 def get_active_ssh_sessions():
     try:
         # Run the 'netstat' command to get information about active sessions
@@ -18,3 +18,4 @@ if active_sessions:
     print(active_sessions)
 else:
     print("Unable to retrieve active SSH sessions.")
+    sys.exit(1)
