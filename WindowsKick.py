@@ -20,8 +20,8 @@ if platform.system() == windows:
                 subprocess.run(['nslookup', nslookup], stdout=f, text=True, check=True)
                 subprocess.run(['nslookup', nslookup])
             print(f"nslookup output saved to {output_file}")
-        except subprocess.CalledProcessError as e:
-            print(f"Error: {e}")
+        except subprocess.CalledProcessError as error:
+            print(f"Error: {error}")
 
     # Function to get the PID of an SSH session associated with an IP address
     def get_ssh_pid(ip_address):
@@ -61,7 +61,7 @@ if platform.system() == windows:
     def main():
 
         who = subprocess.check_output(['tasklist']).decode('utf-8')  # Windows equivalent of 'who'
-        print(who)
+        print(f"{who}")
 
         nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
 
@@ -71,7 +71,7 @@ if platform.system() == windows:
         
         elif nslookupOrKick.lower() == 'kick':
             ip_address = input("Enter the IP address of the user you want to kick off: ")
-            kick_user(ip_address)
+            kick_user(f"{ip_address}")
         else:
             print("I don't understand what you meant. Please try again.")
 
