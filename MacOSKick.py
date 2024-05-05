@@ -32,6 +32,7 @@ if platform.system() == Mac:
                 if 'ESTABLISHED' in line and ip_address in line:
                     pid = line.split()[6].split('/')[0]
                     return pid
+
         except subprocess.CalledProcessError:
             print("Error: Unable to retrieve PID for IP address", ip_address)
         return None   
@@ -70,22 +71,28 @@ if platform.system() == Mac:
             print(f"{RED}This script requires sudo privileges to run.{RESET}")
             sys.exit(1)
         else:
-            who = subprocess.check_output(['who']).decode('utf-8')
-            print(who)
+            who = subprocess.run(['who'], capture_output=True, text=True)
+            connected = who.stdout
+        
+            # Check if there are any SSH sessions
+            if 'pts/' in connected:
+                print("There are SSH sessions active.")
+                nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
 
-            nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
+                if nslookupOrKick in nslookupCommand:
+                    NSLOOKUP()
+                    sys.exit(0)
+                
+                elif nslookupOrKick in KICK:
+                    ip_address = input("Enter the IP address of the user you want to kick off: ")
+                    kick_user(ip_address)
 
-            if nslookupOrKick in nslookupCommand:
-                NSLOOKUP()
-                sys.exit(0)
-            
-            elif nslookupOrKick in KICK:
-                ip_address = input("Enter the IP address of the user you want to kick off: ")
-                kick_user(ip_address)
+                else:
+                    print("I don't understand what you meant. Please try again.")
 
             else:
-                print("I don't understand what you meant. Please try again.")
-
+                print("There are no SSH sessions active.")
+            
     # Script execution
     if __name__ == "__main__":
         try:
