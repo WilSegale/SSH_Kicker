@@ -1,86 +1,92 @@
+# holds the packages for the program to work conrrectly
 from DontEdit import *
+# Function to check if SSH is enabled on macOS
+if platform.system() == linux:
+    # Function to perform a DNS lookup
+    def NSLOOKUP():
+            nslookup = input("Enter the domain to lookup: ")
+            output_file = "nslookup.txt"
 
-def NSLOOKUP():
-        nslookup = input("Enter the domain to lookup: ")
-        output_file = "nslookup.txt"
+            try:
+                with open(output_file, 'a') as f:
+                    subprocess.run(['nslookup', nslookup], stdout=f, text=True, check=True)
+                    subprocess.run(['nslookup', nslookup])
+                print(f"nslookup output saved to {output_file}")
+            except subprocess.CalledProcessError as e:
+                print(f"Error: {e}")
 
+    # Function to get the PID of an SSH session associated with an IP address
+    def get_ssh_pid(ip_address):
         try:
-            with open(output_file, 'a') as f:
-                subprocess.run(['nslookup', nslookup], stdout=f, text=True, check=True)
-                subprocess.run(['nslookup', nslookup])
-            print(f"nslookup output saved to {output_file}")
-        except subprocess.CalledProcessError as e:
-            print(f"Error: {e}")
+            pid_info = subprocess.check_output(['netstat', '-tnpa']).decode('utf-8')
+            for line in pid_info.split('\n'):
+                if 'ESTABLISHED' in line and ip_address in line:
+                    pid = line.split()[6].split('/')[0]
+                    return pid
 
-# Function to get the PID of an SSH session associated with an IP address
-def get_ssh_pid(ip_address):
-    try:
-        pid_info = subprocess.check_output(['netstat', '-tnpa']).decode('utf-8')
-        for line in pid_info.split('\n'):
-            if 'ESTABLISHED' in line and ip_address in line:
-                pid = line.split()[6].split('/')[0]
-                return pid
-
-    except subprocess.CalledProcessError:
-        print("Error: Unable to retrieve PID for IP address", ip_address)
-    return None
-
-# Function to kick a user off the computer by terminating their SSH session
-def kick_user(ip_address):
-    pid = get_ssh_pid(ip_address)
-    if pid:
-        try:
-            subprocess.run(['sudo', 'kill', pid])
-            print(f"SSH session associated with {ip_address} has been terminated.")
-            with open("KICKED_USERS.txt", "a") as kicked_users_file:
-                print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
-                print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
-                time.sleep(2)
-                print("Do you want to turn off ssh (yes/no)")
-                ssh = input(">>> ")
-                if ssh in yes:
-                    subprocess.run(['sudo', 'service', 'ssh', 'stop'])
-                    time.sleep(2)
-                    subprocess.run(['sudo', 'service', 'ssh', 'status'])
-                else:
-                    print("Ok SSH will still run")
         except subprocess.CalledProcessError:
-            print(f"[ {RED}FAIL{RESET} ] Unable to terminate SSH session for IP address {ip_address}")
-    else:
-        print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
+            print("Error: Unable to retrieve PID for IP address", ip_address)
+        return None
 
-# Main function
-def main():
+    # Function to kick a user off the computer by terminating their SSH session
+    def kick_user(ip_address):
+        pid = get_ssh_pid(ip_address)
+        if pid:
+            try:
+                subprocess.run(['sudo', 'kill', pid])
+                print(f"SSH session associated with {ip_address} has been terminated.")
+                with open("KICKED_USERS.txt", "a") as kicked_users_file:
+                    print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
+                    print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
+                    time.sleep(2)
+                    print("Do you want to turn off ssh (yes/no)")
+                    ssh = input(">>> ")
+                    if ssh in yes:
+                        subprocess.run(['sudo', 'service', 'ssh', 'stop'])
+                        time.sleep(2)
+                        subprocess.run(['sudo', 'service', 'ssh', 'status'])
+                    else:
+                        print("Ok SSH will still run")
+            except subprocess.CalledProcessError:
+                print(f"[ {RED}FAIL{RESET} ] Unable to terminate SSH session for IP address {ip_address}")
+        else:
+            print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
 
-    if os.geteuid() != ROOT:
-        print(f"{RED}This script requires sudo privileges to run.{RESET}")
-        sys.exit(1)
-    else:
-        who = subprocess.run(['who'], capture_output=True, text=True)
-        connected = who.stdout
-        
-        # Check if there are any SSH sessions
-        if 'pts/' in connected:
-            print("There are SSH sessions active.")
-            nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
+    # Main function
+    def main():
 
-            if nslookupOrKick in nslookupCommand:
-                NSLOOKUP()
-                sys.exit(0)
-                
-            elif nslookupOrKick in KICK:
-                ip_address = input("Enter the IP address of the user you want to kick off: ")
-                kick_user(ip_address)
+        if os.geteuid() != ROOT:
+            print(f"{RED}This script requires sudo privileges to run.{RESET}")
+            sys.exit(1)
+        else:
+            who = subprocess.run(['who'], capture_output=True, text=True)
+            connected = who.stdout
+            
+            # Check if there are any SSH sessions
+            if 'pts/' in connected:
+                print("There are SSH sessions active.")
+                nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
+
+                if nslookupOrKick in nslookupCommand:
+                    NSLOOKUP()
+                    sys.exit(0)
+                    
+                elif nslookupOrKick in KICK:
+                    ip_address = input("Enter the IP address of the user you want to kick off: ")
+                    kick_user(ip_address)
+
+                else:
+                    print("I don't understand what you meant. Please try again.")
 
             else:
-                print("I don't understand what you meant. Please try again.")
-
-        else:
-            print("There are no SSH sessions active.")
-            
-# Script execution
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nExiting program...")
+                print("There are no SSH sessions active.")
+                
+    # Script execution
+    if __name__ == "__main__":
+        try:
+            main()
+        except KeyboardInterrupt:
+            print("\nExiting program...")
+else:
+    print("This script only works on Linux.")
+    sys.exit(1)
