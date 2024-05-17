@@ -47,18 +47,6 @@ if platform.system() == Mac:
                 with open("KICKED_USERS.txt", "a") as kicked_users_file:
                     print(f"We have kicked {BRIGHT}{GREEN}{ip_address}{RESET} off your computer")
                     print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
-                    time.sleep(2)
-                    if platform.system() == linux:
-                        print("Do you want to turn off ssh (yes/no)")
-                        ssh = input(">>> ")
-                        if ssh in yes:
-                            subprocess.run(['sudo', 'service', 'ssh', 'stop'])
-                            time.sleep(2)
-                            subprocess.run(['sudo', 'service', 'ssh', 'status'])
-                        else:
-                            print("Ok SSH will still run")
-                    else:
-                        sys.exit(1)
             except subprocess.CalledProcessError:
                 print(f"[ {RED}FAIL{RESET} ] Unable to terminate SSH session for IP address {ip_address}")
         else:
