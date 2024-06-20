@@ -1,7 +1,10 @@
-from DontEdit import *
+import subprocess
+import sys
+import platform
+import time
 
 # Function to check if SSH is enabled on Windows
-if platform.system() == windows:
+if platform.system() == 'Windows':
 
     def is_ssh_enabled_windows():
         try:
@@ -18,10 +21,9 @@ if platform.system() == windows:
         try:
             with open(output_file, 'a') as f:
                 subprocess.run(['nslookup', nslookup], stdout=f, text=True, check=True)
-                subprocess.run(['nslookup', nslookup])
             print(f"nslookup output saved to {output_file}")
-        except subprocess.CalledProcessError as error:
-            print(f"Error: {error}")
+        except subprocess.CalledProcessError as e:
+            print(f"Error: {e}")
 
     # Function to get the PID of an SSH session associated with an IP address
     def get_ssh_pid(ip_address):
@@ -43,7 +45,6 @@ if platform.system() == windows:
                 subprocess.run(['taskkill', '/F', '/PID', pid])
                 print(f"SSH session associated with {ip_address} has been terminated.")
                 with open("KICKED_USERS.txt", "a") as kicked_users_file:
-                    print(f"We have kicked {ip_address} off your computer")
                     print(f"We have kicked {ip_address} off your computer", file=kicked_users_file)
                     time.sleep(2)
                     print("Do you want to turn SSH only to localusers? (yes/no)")
@@ -53,15 +54,15 @@ if platform.system() == windows:
                     else:
                         print("SSH will still run.")
             except subprocess.CalledProcessError:
-                print(f"[ {RED}FAIL{RESET} ] Unable to terminate SSH session for IP address {ip_address}")
+                print(f"[FAIL] Unable to terminate SSH session for IP address {ip_address}")
         else:
-            print(f"[ {RED}FAIL{RESET} ] No active SSH session found for IP address {ip_address}")
+            print(f"[FAIL] No active SSH session found for IP address {ip_address}")
 
     # Main function
     def main():
 
         who = subprocess.check_output(['tasklist']).decode('utf-8')  # Windows equivalent of 'who'
-        print(f"{who}")
+        print(who)
 
         nslookupOrKick = input("Do you want to nslookup or kick a user? (nslookup/kick): ")
 
@@ -71,7 +72,7 @@ if platform.system() == windows:
         
         elif nslookupOrKick.lower() == 'kick':
             ip_address = input("Enter the IP address of the user you want to kick off: ")
-            kick_user(f"{ip_address}")
+            kick_user(ip_address)
         else:
             print("I don't understand what you meant. Please try again.")
 
