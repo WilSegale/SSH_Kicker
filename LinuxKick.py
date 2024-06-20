@@ -41,7 +41,7 @@ def NSLOOKUP():
 def get_ssh_pid(ip_address):
     try:
         if platform.system() == "Darwin":
-            pid_info = subprocess.check_output(['netstat', '-tnpa']).decode('utf-8')
+            pid_info = subprocess.check_output(['netstat', '-tnp']).decode('utf-8')
         elif platform.system() == "Linux":
             pid_info = subprocess.check_output(['ss', '-tnp']).decode('utf-8')
 
@@ -51,7 +51,29 @@ def get_ssh_pid(ip_address):
                 return pid
     except subprocess.CalledProcessError:
         print(f"Error: Unable to retrieve PID for IP address {ip_address}")
-    return None   
+    return None
+
+# Function to display active SSH connections
+def display_active_ssh_connections():
+    try:
+        if platform.system() == "Darwin":
+            connection_info = subprocess.check_output(['netstat', '-tn']).decode('utf-8')
+        elif platform.system() == "Linux":
+            connection_info = subprocess.check_output(['ss', '-tn']).decode('utf-8')
+
+        ssh_connections = []
+        for line in connection_info.split('\n'):
+            if 'ESTABLISHED' in line and ('22' in line or 'ssh' in line):
+                ssh_connections.append(line)
+        
+        if ssh_connections:
+            print(f"{BRIGHT}{GREEN}Active SSH connections:{RESET}")
+            for conn in ssh_connections:
+                print(conn)
+        else:
+            print("No active SSH connections found.")
+    except subprocess.CalledProcessError:
+        print(f"{RED}Error: Unable to retrieve active SSH connections.{RESET}")
 
 # Function to kick a user off the computer by terminating their SSH session
 def kick_user(ip_address):
@@ -73,10 +95,13 @@ def main():
     if os.geteuid() != 0:  # Check if the script is run with root privileges
         print(f"{RED}This script requires sudo privileges to run.{RESET}")
         sys.exit(1)
-    
+
+    # Display active SSH connections
+    display_active_ssh_connections()
+
     who = subprocess.run(['who'], capture_output=True, text=True)
     connected = who.stdout
-    
+
     # Check if there are any SSH sessions
     if 'pts/' in connected or 'tty' in connected:
         print("There are SSH sessions active.")
