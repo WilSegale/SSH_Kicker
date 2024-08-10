@@ -15,7 +15,6 @@ os_name = platform.system()
 
 linux = "Linux"
 Mac = "Darwin"
-windows = "Windows"
 
 # Color variables
 BRIGHT = '\033[1m'
@@ -45,13 +44,3 @@ nslookupCommand = [
 KICK = ["kick",
         "Kick",
         "KICK"]
-
-
-yes = ["yes",
-       "Yes",
-       "YES",
-       "y",
-       "Y"]
-
-ENABLE = ["--enable"]
-DISABLE = ["--disable"]
