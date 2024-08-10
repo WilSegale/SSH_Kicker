@@ -1,5 +1,8 @@
+import os
 import subprocess
-KickUser = input("Enter the username to kick: ")
+from DontEdit import *
+from DontEdit import KICK, nslookupCommand  # Ensure KICK and nslookupCommand are defined in DontEdit
+
 def get_ssh_pids(username):
     try:
         # Get the list of all active SSH sessions for the user
@@ -24,5 +27,20 @@ def kick_ssh_user(username):
         except subprocess.CalledProcessError as e:
             print(f"Failed to terminate SSH session with PID {pid}: {e}")
 
-# Example usage
-kick_ssh_user()
+def lookup():
+    lookupUser = input("Enter the IP to lookup: ")
+    print(f"Looking up {GREEN}{lookupUser}...{RESET}")
+    os.system(f"nslookup {lookupUser}")
+
+chooseOption = input("Would you like to Kick or lookup username? ")
+
+if chooseOption.lower() in KICK:
+    KickUserCommand = input("Enter the username to kick: ")
+    kick_ssh_user(KickUserCommand)  # Pass the correct variable here
+
+elif chooseOption.lower() in nslookupCommand:
+    os.system("who")
+    lookup()
+
+else:
+    print("Invalid option chosen. Please choose either 'Kick' or 'lookup'.")
