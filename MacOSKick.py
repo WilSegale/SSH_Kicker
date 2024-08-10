@@ -1,7 +1,7 @@
 import os
 import subprocess
-from DontEdit import KICK, nslookupCommand  # Ensure KICK and nslookupCommand are defined in DontEdit
 from DontEdit import *
+from DontEdit import KICK, nslookupCommand  # Ensure KICK and nslookupCommand are defined in DontEdit
 os.system("who")
 def get_ssh_pids(username):
     try:
@@ -39,7 +39,6 @@ if chooseOption.lower() in KICK:
     kick_ssh_user(KickUserCommand)  # Pass the correct variable here
 
 elif chooseOption.lower() in nslookupCommand:
-    os.system("who")
     lookup()
 
 else:

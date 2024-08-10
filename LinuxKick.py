@@ -39,7 +39,6 @@ if chooseOption.lower() in KICK:
     kick_ssh_user(KickUserCommand)  # Pass the correct variable here
 
 elif chooseOption.lower() in nslookupCommand:
-    os.system("who")
     lookup()
 
 else:
