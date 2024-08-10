@@ -2,7 +2,9 @@ import os
 import subprocess
 from DontEdit import *
 from DontEdit import KICK, nslookupCommand  # Ensure KICK and nslookupCommand are defined in DontEdit
+
 os.system("who")
+
 def get_ssh_pids(username):
     try:
         # Get the list of all active SSH sessions for the user
