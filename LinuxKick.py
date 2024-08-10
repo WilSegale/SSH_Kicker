@@ -16,7 +16,7 @@ def get_ssh_pids(username):
 def kick_ssh_user(username):
     ssh_pids = get_ssh_pids(username)
     if not ssh_pids:
-        print(f"No active SSH sessions found for user: {username}")
+        print(f"[ {RED}FAIL{RESET} ]  No active SSH sessions found for user: {username}")
         return
 
     for pid in ssh_pids:
