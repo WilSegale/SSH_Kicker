@@ -52,8 +52,11 @@ try:
                 subprocess.run(["rm", "-rf", "MacOSKick.py"])
             else:
                 print("I don't know your OS")
-        else:
+        elif CHECK_USER_ANSWER in no:
             print("Ok I will not run the program")
+            sys.exit(1)
+        else:
+            print("Please enter a valid answer")
             sys.exit(1)
     check_OS()
 except KeyboardInterrupt:
