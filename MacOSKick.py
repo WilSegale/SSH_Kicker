@@ -26,13 +26,14 @@ def start():
             try:
                 # Kill the SSH process by PID
                 subprocess.check_call(['kill', '-9', pid])
-                print(f"Terminated SSH session for user {username}, PID: {pid}")
+                print(f"[ {GREEN}SUCCESS{RESET} ]Terminated SSH session for user {username}, PID: {pid}")
             except subprocess.CalledProcessError as e:
-                print(f"Failed to terminate SSH session with PID {pid}: {e}")
+                print(f"[ {RED}FAIL{RESET} ]Failed to terminate SSH session with PID {pid}: {e}")
 
     def lookup():
         lookupUser = input("Enter the IP to lookup: ")
         print(f"Looking up {GREEN}{lookupUser}...{RESET}")
+        time.sleep(1)
         os.system(f"nslookup {lookupUser}")
 
     chooseOption = input("Would you like to Kick or lookup username? ")

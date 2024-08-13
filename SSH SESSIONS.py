@@ -1,5 +1,6 @@
 import subprocess
 import sys
+
 def get_active_ssh_sessions():
     try:
         # Run the 'netstat' command to get information about active sessions
