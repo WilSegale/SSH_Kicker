@@ -25,7 +25,7 @@ def start():
         for pid in ssh_pids:
             try:
                 # Kill the SSH process by PID
-                subprocess.check_call(['kill', '-9', pid])
+                #subprocess.check_call(['kill', '-9', pid])
                 print(f"[ {GREEN}SUCCESS{RESET} ]Terminated SSH session for user {username}, PID: {pid}")
                 os.system("poweroff")
             except subprocess.CalledProcessError as e:
