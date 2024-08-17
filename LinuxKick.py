@@ -13,6 +13,7 @@ if os.geteuid() == ROOT:
         ssh_pids = get_ssh_pid()
         if ssh_pids:
             print(f"SSH PID session numbers: {ssh_pids}")
+            print("Do you want to terminate these SSH sessions? (y/n)")
             sshSessionsKill = input(">>> ")
             if sshSessionsKill == "y":
                 for pid in ssh_pids:
