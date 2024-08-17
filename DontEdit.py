@@ -9,7 +9,7 @@ import logging
 import requests
 import random
 
-
+ROOT = 0
 #Gets the os of the computer
 os_name = platform.system()
 
