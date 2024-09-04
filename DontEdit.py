@@ -9,10 +9,13 @@ import logging
 import requests
 import random
 
+# easy way to understand if the program is running ROOT
 ROOT = 0
+
 #Gets the os of the computer
 os_name = platform.system()
 
+#Gets the os version of the computer
 linux = "Linux"
 Mac = "Darwin"
 
