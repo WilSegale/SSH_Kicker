@@ -14,7 +14,7 @@ try:
             if not os.path.exists(file_path):
                 print(f"Program already run")
                 sys.exit(1)
-
+        # if the user chooces yes it will run the program
         if CHECK_USER_ANSWER in yes:
             print("Ok let me run a quick scan")
             print("Please wait...")
@@ -52,8 +52,17 @@ try:
                 subprocess.run(["rm", "-rf", "MacOSKick.py"])
             else:
                 print("I don't know your OS")
+        
+        # if the user chooces no it will not run the program
         elif CHECK_USER_ANSWER in no:
             print("Ok I will not run the program")
+            sys.exit(1)
+        
+        # if the user askes for help it will tell the user how to use the porgram
+        elif CHECK_USER_ANSWER in help:
+            print("You can only answer yes or no")
+            print("If you don't know how to use the program please ask me")
+            # exit the program
             sys.exit(1)
         else:
             print("Please enter a valid answer")

@@ -55,6 +55,12 @@ yes = [
     "Yes"
 ]
 
+help = [
+    "help",
+    "Help",
+    "HELP"
+]
+
 no = [
     "NO",
     "no",
