@@ -36,7 +36,7 @@ try:
                     print(f"PID: {session['pid']}, Local: {session['local_address']}, Remote: {session['remote_address']}")
                 
                 # Ask the user if they want to terminate the SSH sessions
-                print("Do you want to terminate these SSH sessions? (y/n/help/exit/nslookup/who)")
+                print("Do you want to terminate these SSH sessions? (y/n/help/nslookup/who)")
                 ssh_sessions_kill = input(">>> ")  # Get user input
 
                 # If the user types 'y', terminate the SSH sessions
@@ -57,13 +57,14 @@ try:
 
                 # If the user types 'help', show the available options
                 elif ssh_sessions_kill == "help":
-                    print("Options: y (terminate), n (do not terminate), exit (quit program), nslookup (run nslookup command), who (show connected users).")
+                    print("Options: y (terminate), n (do not terminate), nslookup (run nslookup command), who (show connected users).")
                 
                 # If the user types 'nslookup', run the nslookup command
                 elif ssh_sessions_kill in nslookupCommand:
                     try:
                         print("To exit this command just type CTRL-C")
                         os.system("nslookup")
+                        pass
                     except KeyboardInterrupt:
                         get_ssh_connections()
                 # If the user types 'who', run the who command to see logged-in users
@@ -71,20 +72,21 @@ try:
                     try:
                         print("To exit this command just type CTRL-C")
                         os.system("who")
+                        pass
                     except KeyboardInterrupt:
                         get_ssh_connections()
 
                 # If the user input is invalid, do nothing and print a message
                 else:
-                    print("Invalid input. SSH sessions will not be terminated.")
+                    print("\nInvalid input. SSH sessions will not be terminated.")
             else:
                 # If no SSH sessions are found, print an appropriate message
-                print(f"{RED}No SSH sessions found.{RESET}")
+                print(f"{RED}\nNo SSH sessions found.{RESET}")
     else:
         # If the user is not running the script as root, print an error message
-        print(f"{RED}PLEASE USE ROOT PRIVILEGES{RESET}")
+        print(f"{RED}\nPLEASE USE ROOT PRIVILEGES{RESET}")
 
 # If the user presses CTRL-C, handle it gracefully
 except KeyboardInterrupt:
-    print("Exiting program...")
+    print("\nExiting program...")
     exit()
