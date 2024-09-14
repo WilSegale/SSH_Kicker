@@ -26,8 +26,13 @@ RED = "\033[91m"
 ORANGE_START = "\033[38;2;255;165;0m"
 RESET = "\033[0m"
 
-#Easy way to read root form the user
-#ROOT = 0
+# runs the who command to see exactly how many ssh sessions are running
+
+WHO = [
+    "who",
+    "Who",
+    "WHO"
+]
 
 # nslookup var for the program to read
 nslookupCommand = [
