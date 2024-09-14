@@ -66,9 +66,9 @@ try:
                     os.system("nslookup")
 
                 # If the user types 'who', run the 'who' command to see logged-in users and SSH connections
-                elif ssh_sessions_kill == WHO:
+                elif ssh_sessions_kill == connected:
                     os.system("who")
-
+                    exit()
                 # If the user input is invalid, do nothing and print a message
                 else:
                     print("Invalid input. SSH sessions will not be terminated.")

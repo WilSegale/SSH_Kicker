@@ -28,7 +28,7 @@ RESET = "\033[0m"
 
 # runs the who command to see exactly how many ssh sessions are running
 
-WHO = [
+connected = [
     "who",
     "Who",
     "WHO"
