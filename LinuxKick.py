@@ -55,7 +55,6 @@ try:
                 # If the user chooses 'n', exit without terminating the SSH sessions
                 elif ssh_sessions_kill == "n":
                     print("SSH sessions will not be terminated.")
-                    exit()  # Exit the program
 
                 # If the user types 'help', show the available options
                 elif ssh_sessions_kill == "help":
