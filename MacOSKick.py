@@ -3,9 +3,8 @@ import psutil  # Import psutil for process and system information utilities
 import os  # Import os for interacting with the operating system
 
 # Check if the current user is root (root has euid 0)
-
 try:
-    if os.geteuid() == ROOT:
+    if os.geteuid() == ROOT:  # Assuming ROOT is defined as 0 or in DontEdit module
 
         # Function to retrieve all active SSH connections
         def get_ssh_connections():
@@ -37,7 +36,7 @@ try:
                     print(f"PID: {session['pid']}, Local: {session['local_address']}, Remote: {session['remote_address']}")
                 
                 # Ask the user if they want to terminate the SSH sessions
-                print("Do you want to terminate these SSH sessions? (y/n/help/exit/nslookup)")
+                print("Do you want to terminate these SSH sessions? (y/n/help/exit/nslookup/who)")
                 ssh_sessions_kill = input(">>> ")  # Get user input
 
                 # If the user types 'y', terminate the SSH sessions
@@ -55,20 +54,19 @@ try:
                 # If the user chooses 'n', exit without terminating the SSH sessions
                 elif ssh_sessions_kill == "n":
                     print("SSH sessions will not be terminated.")
-                    exit()  # Exit the program
 
                 # If the user types 'help', show the available options
                 elif ssh_sessions_kill == "help":
-                    print("Options: y (terminate), n (do not terminate), exit (quit program), nslookup (run nslookup command).")
+                    print("Options: y (terminate), n (do not terminate), exit (quit program), nslookup (run nslookup command), who (show connected users).")
                 
-                # If the user types the nslookup command, run it to resolve hostnames/IP addresses
-                elif ssh_sessions_kill == nslookupCommand:
+                # If the user types 'nslookup', run the nslookup command
+                elif ssh_sessions_kill in nslookupCommand:
                     os.system("nslookup")
 
-                # If the user types 'who', run the 'who' command to see logged-in users and SSH connections
-                elif ssh_sessions_kill == connected:
+                # If the user types 'who', run the who command to see logged-in users
+                elif ssh_sessions_kill in connected:
                     os.system("who")
-                    exit()
+
                 # If the user input is invalid, do nothing and print a message
                 else:
                     print("Invalid input. SSH sessions will not be terminated.")
@@ -79,7 +77,7 @@ try:
         # If the user is not running the script as root, print an error message
         print(f"{RED}PLEASE USE ROOT PRIVILEGES{RESET}")
 
-# if the user uses CTRL-C it will exit softly
+# If the user presses CTRL-C, handle it gracefully
 except KeyboardInterrupt:
     print("Exiting program...")
     exit()
