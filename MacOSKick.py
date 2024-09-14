@@ -1,31 +1,43 @@
 from DontEdit import *
 import psutil
-if os.geteuid() == ROOT:
+import os
 
-    def get_ssh_pid():
-        ssh_pids = []
+if os.geteuid() == ROOT:  # Check for root privileges
+
+    def get_ssh_connections():
+        ssh_info = []
         for proc in psutil.process_iter(['pid', 'name']):
             if proc.info['name'] == 'sshd':  # 'sshd' is the SSH daemon process name
-                ssh_pids.append(proc.info['pid'])
-        return ssh_pids
+                connections = proc.connections(kind='inet')
+                for conn in connections:
+                    if conn.status == psutil.CONN_ESTABLISHED:
+                        ssh_info.append({
+                            'pid': proc.info['pid'],
+                            'local_address': conn.laddr,
+                            'remote_address': conn.raddr
+                        })
+        return ssh_info
 
     if __name__ == "__main__":
-        ssh_pids = get_ssh_pid()
-        if ssh_pids:
-            print(f"SSH PID session numbers: {ssh_pids}")
+        ssh_sessions = get_ssh_connections()
+        if ssh_sessions:
+            print(f"Active SSH sessions:")
+            for session in ssh_sessions:
+                print(f"PID: {session['pid']}, Local: {session['local_address']}, Remote: {session['remote_address']}")
+            
             print("Do you want to terminate these SSH sessions? (y/n)")
-            sshSessionsKill = input(">>> ")
-            if sshSessionsKill == "y":
-                for pid in ssh_pids:
+            ssh_sessions_kill = input(">>> ")
+            if ssh_sessions_kill == "y":
+                for session in ssh_sessions:
                     try:
-                        process = psutil.Process(pid)
+                        process = psutil.Process(session['pid'])
                         process.terminate()
-                        print(f"Process with PID {GREEN}{pid}{RESET} has been terminated.")
+                        print(f"Process with PID {GREEN}{session['pid']}{RESET} has been terminated.")
                     except psutil.NoSuchProcess:
-                        print(f"Process with PID {RED}{pid}{RESET} does not exist.")
+                        print(f"Process with PID {RED}{session['pid']}{RESET} does not exist.")
             else:
-                print("SSH sessions will not be terminated.")  # User chose not to terminate SSH sessions terminated.
+                print("SSH sessions will not be terminated.")
         else:
             print(f"{RED}No SSH sessions found.{RESET}")
 else:
-    print(f"{RED}PLASES USE ROOT{RESET}")
+    print(f"{RED}PLEASE USE ROOT PRIVILEGES{RESET}")
