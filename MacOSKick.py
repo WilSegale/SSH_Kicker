@@ -61,11 +61,18 @@ try:
                 
                 # If the user types 'nslookup', run the nslookup command
                 elif ssh_sessions_kill in nslookupCommand:
-                    os.system("nslookup")
-
+                    try:
+                        print("To exit this command just type CTRL-C")
+                        os.system("nslookup")
+                    except KeyboardInterrupt:
+                        get_ssh_connections()
                 # If the user types 'who', run the who command to see logged-in users
                 elif ssh_sessions_kill in connected:
-                    os.system("who")
+                    try:
+                        print("To exit this command just type CTRL-C")
+                        os.system("who")
+                    except KeyboardInterrupt:
+                        get_ssh_connections()
 
                 # If the user input is invalid, do nothing and print a message
                 else:
