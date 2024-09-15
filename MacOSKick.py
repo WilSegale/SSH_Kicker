@@ -64,6 +64,7 @@ try:
                     try:
                         print("To exit this command just type CTRL-C")
                         os.system("nslookup")
+                        
                         pass
                     except KeyboardInterrupt:
                         get_ssh_connections()
