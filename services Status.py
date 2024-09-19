@@ -36,4 +36,4 @@ if platform.system() == linux:
 
 # if the user is not on linux then it will tell them that the program only works on linux
 else:
-    print("This program only works on Linux computers")
+    print(f"[ {RED}-{RESET} ] This program only works on Linux computers")

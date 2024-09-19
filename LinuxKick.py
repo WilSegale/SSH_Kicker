@@ -35,7 +35,7 @@ try:
                     print(f"PID: {session['pid']}, Local: {session['local_address']}, Remote: {session['remote_address']}")
                 
                 # Ask the user if they want to terminate the SSH sessions
-                print("Do you want to terminate these SSH sessions? (y/n/help/nslookup/who)")
+                print("Do you want to terminate these SSH sessions? (y/kick/n/help/nslookup/who)")
                 ssh_sessions_kill = input(">>> ")  # Get user input
 
                 # If the user types 'y', terminate the SSH sessions
@@ -56,7 +56,7 @@ try:
 
                 # If the user types 'help', show the available options
                 elif ssh_sessions_kill == "help":
-                    print("Options: y (terminate), n (do not terminate), nslookup (run nslookup command), who (show connected users).")
+                    print("Options: y (terminate) or kick (terminate), n (do not terminate), nslookup (run nslookup command), who (show connected users).")
                 
                 # If the user types 'nslookup', run the nslookup command
                 elif ssh_sessions_kill in nslookupCommand:
@@ -72,7 +72,7 @@ try:
                     try:
                         print("To exit this command just type CTRL-C")
                         os.system("who")
-                        pass
+                        exit()
                     except KeyboardInterrupt:
                         get_ssh_connections()
 
