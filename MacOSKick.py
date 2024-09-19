@@ -40,13 +40,13 @@ try:
                 ssh_sessions_kill = input(">>> ")  # Get user input
 
                 # If the user types 'y', terminate the SSH sessions
-                if ssh_sessions_kill == "y":
+                if ssh_sessions_kill == "y" or ssh_sessions_kill in KICK:
                     for session in ssh_sessions:
                         try:
                             # Try to terminate the process by its PID
                             process = psutil.Process(session['pid'])
                             process.terminate()
-                            print(f"Process with PID {GREEN}{session['pid']}{RESET} has been terminated.")
+                            print(f"Process with PID {GREEN}{session['pid']}{RESET} and the remote connection {GREEN}{session['remote_address']}{RESET} has been terminated.")
                         except psutil.NoSuchProcess:
                             # If the process no longer exists, inform the user
                             print(f"Process with PID {RED}{session['pid']}{RESET} does not exist.")

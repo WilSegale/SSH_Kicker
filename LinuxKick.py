@@ -2,10 +2,9 @@ from DontEdit import *  # Import everything from the module DontEdit
 import psutil  # Import psutil for process and system information utilities
 import os  # Import os for interacting with the operating system
 
-# Check if the current user is root (root has euid 0)
 try:
+    # Check if the current user is root (root has euid 0)
     if os.geteuid() == ROOT:  # Assuming ROOT is defined as 0 or in DontEdit module
-
         # Function to retrieve all active SSH connections
         def get_ssh_connections():
             ssh_info = []  # List to store information about SSH connections
@@ -40,13 +39,13 @@ try:
                 ssh_sessions_kill = input(">>> ")  # Get user input
 
                 # If the user types 'y', terminate the SSH sessions
-                if ssh_sessions_kill == "y":
+                if ssh_sessions_kill == "y" or ssh_sessions_kill in KICK:
                     for session in ssh_sessions:
                         try:
                             # Try to terminate the process by its PID
                             process = psutil.Process(session['pid'])
                             process.terminate()
-                            print(f"Process with PID {GREEN}{session['pid']}{RESET} has been terminated.")
+                            print(f"Process with PID {GREEN}{session['pid']}{RESET} and the remote connection {GREEN}{session['remote_address']}{RESET} has been terminated.")
                         except psutil.NoSuchProcess:
                             # If the process no longer exists, inform the user
                             print(f"Process with PID {RED}{session['pid']}{RESET} does not exist.")
@@ -64,6 +63,7 @@ try:
                     try:
                         print("To exit this command just type CTRL-C")
                         os.system("nslookup")
+                        
                         pass
                     except KeyboardInterrupt:
                         get_ssh_connections()

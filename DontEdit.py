@@ -54,10 +54,14 @@ KICK = [
     "Kick",
     "KICK"
 ]
+
 yes = [
     "YES",
     "yes",
-    "Yes"
+    "Yes",
+    "Y",
+    "y"
+
 ]
 
 help = [
@@ -69,5 +73,7 @@ help = [
 no = [
     "NO",
     "no",
-    "No"
+    "No",
+    "N",
+    "n"
 ]
