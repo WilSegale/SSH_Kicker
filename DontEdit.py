@@ -35,6 +35,7 @@ nslookupCommand = ["nslookup",
                    "ns",
                    "NS"]
 # var for the kick funciotn of the program
+<<<<<<< HEAD
 KICK = ["kick",
         "Kick",
         "KICK"]
@@ -48,3 +49,27 @@ yes = ["yes",
 
 ENABLE = ["--enable","--Enable","--ENABLE"]
 DISABLE = ["--disable","--Disable","--DISABLE"]
+=======
+KICK = [
+    "kick",
+    "Kick",
+    "KICK"
+]
+yes = [
+    "YES",
+    "yes",
+    "Yes"
+]
+
+help = [
+    "help",
+    "Help",
+    "HELP"
+]
+
+no = [
+    "NO",
+    "no",
+    "No"
+]
+>>>>>>> parent of 0bcf518 (update)
