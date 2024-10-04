@@ -1,0 +1,5 @@
+Server:		192.168.1.1
+Address:	192.168.1.1#53
+
+194.1.168.192.in-addr.arpa	name = DESKTOP-5TLR39V.fios-router.home.
+

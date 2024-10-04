@@ -1,7 +1,7 @@
 from DontEdit import *
 try:
     # Check the existence of each file
-    file_paths = ["WindowsKick.py", "LinuxKick.py", "MacOSKick.py"]
+    file_paths = ["LinuxKick.py", "MacOSKick.py"]
 
     # Get the operating system name
 
@@ -14,7 +14,7 @@ try:
             if not os.path.exists(file_path):
                 print(f"Program already run")
                 sys.exit(1)
-
+        # if the user chooces yes it will run the program
         if CHECK_USER_ANSWER in yes:
             print("Ok let me run a quick scan")
             print("Please wait...")
@@ -45,23 +45,27 @@ try:
                 print("You are using MacOS.",
                       "So I will remove the Linux veriosn of the program.")  
                 subprocess.run(["rm", "-rf", "LinuxKick.py"])
-                subprocess.run(["rm", "-rf", "WindowsKick.py"])
         
             elif os_name == linux:
                 print("You are using Linux.",
-                      "So I will remove the MAC and Windows veriosn of the program.")
+                      "So I will remove the MAC veriosn of the program.")
                 subprocess.run(["rm", "-rf", "MacOSKick.py"])
-                subprocess.run(["rm", "-rf", "WindowsKick.py"])
-            
-            elif os_name == windows:
-                print("You are using Windows.",
-                    "So I will remove the Linux and the MacOs veriosn of the program.")
-                subprocess.run(["del", "MacOSKick.py"])
-                subprocess.run(["del", "LinuxKick.py"])
             else:
                 print("I don't know your OS")
-        else:
+        
+        # if the user chooces no it will not run the program
+        elif CHECK_USER_ANSWER in no:
             print("Ok I will not run the program")
+            sys.exit(1)
+        
+        # if the user askes for help it will tell the user how to use the porgram
+        elif CHECK_USER_ANSWER in help:
+            print("You can only answer yes or no")
+            print("If you don't know how to use the program please ask me")
+            # exit the program
+            sys.exit(1)
+        else:
+            print("Please enter a valid answer")
             sys.exit(1)
     check_OS()
 except KeyboardInterrupt:
