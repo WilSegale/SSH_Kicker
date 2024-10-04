@@ -1,17 +1,4 @@
-import os
-import sys
-import subprocess
-import time
-import platform
-
-# Define constants
-ROOT = 0
-nslookupCommand = ["nslookup", "lookup"]
-KICK = ["kick"]
-yes = ["yes", "y"]
-RED = '\033[91m'
-RESET = '\033[0m'
-
+from DontEdit import *
 # Function to check if SSH is enabled on macOS
 def is_ssh_enabled():
     try:
