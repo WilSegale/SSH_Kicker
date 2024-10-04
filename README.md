@@ -1,4 +1,4 @@
-<img src="Python Security program.JPG" alt="Security python IMG" style="width: 150px; height: 150; border-radius: 50%; object-fit: cover;">
+<img src="Python Security program.JPG" alt="Security python IMG" width="200" height="200">
 
 
 # SSH Kicker
@@ -14,6 +14,7 @@ SSH KICKER is a Python script designed to help you manage SSH sessions on your s
 ## Requirements
 
 - Python 3.x
+- Windows Operating System
 - Linux Operating System
 - Mac Operating System
 
@@ -22,13 +23,13 @@ SSH KICKER is a Python script designed to help you manage SSH sessions on your s
 1. Clone the repository:
 
     ```shell
-    git clone https://github.com/WilSegale/SSH_Kicker.git
+    git clone https://github.com/WilSegale/security_python.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd SSH_Kicker
+    cd security_python
     ```
 
 3. Run the setup script:
@@ -38,15 +39,20 @@ SSH KICKER is a Python script designed to help you manage SSH sessions on your s
     ```
 4. Run the python file for linux
     ```bash     
-    python3 LinuxKick.py
+    sudo python3 LinuxKick.py
     ```
 
 5. Run the python file for MacOS
     ```bash
-    python3 MacOSKick.py
+    sudo python3 MacOSKick.py
+    ```
+6. Run the python file for Windows in ADMIN mode
+    ```bat
+    python3 WindowsKick.py
     ```
 ## Usage
-1. Run the script: `python kickUserSetup.py` 
+
+1. Run the script: `python kickUserSetup.py`
 2. Follow the prompts to select an action.
 3. Depending on your choice, provide necessary inputs such as domain name or IP address.
 
