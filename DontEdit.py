@@ -20,6 +20,7 @@ Mac = "Darwin"
 ROOT = 0
 nslookupCommand = ["nslookup", "lookup"]
 KICK = ["kick"]
+no = ["no", "n"]
 yes = ["yes", "y"]
 GREEN = '\033[92m'
 RED = '\033[91m'
